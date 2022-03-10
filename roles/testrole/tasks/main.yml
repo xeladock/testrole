@@ -1,0 +1,15 @@
+---
+# tasks file for testrole
+- name: redefine test_part
+  set_fact:
+    test_part: test2
+
+- name: debug test (no tag applied)
+  debug:
+    msg: "this task executes in role"
+
+- name: debug external var (tagA applied)
+  debug:
+    msg: "{{ custom_var }}"
+  tags:
+    - tagA

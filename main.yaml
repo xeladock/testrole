@@ -1,0 +1,23 @@
+---
+- name: using roles
+  hosts: local
+  connection: local
+  vars:
+    test_part: test
+  pre_tasks:
+    - name: pre-task test
+      debug:
+        msg: "This task executes before roles' tasks"
+    # - name: set fact
+    #   set_fact:
+    #     test_part: test
+  roles:
+    - role: "{{ test_part }}role"
+      vars:
+        custom_var: 42
+      tags: tagA
+      when: test_part == "test"
+  tasks:
+    - name: task from main playbook
+      debug: 
+        msg: "This task executes after roles' tasks"
